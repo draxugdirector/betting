@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Football Fixtures</title>
+</head>
+<body>
+  <h1>Upcoming Matches - Arsenal</h1>
+  <ul id="matchList"></ul>
+
+  <script>
+    const apiKey = '123'; // Replace with your actual key
+    const teamId = '133604'; // Arsenal FC
+    const url = `https://www.thesportsdb.com/api/v1/json/${123}/eventsnext.php?id=${teamId}`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        const matchList = document.getElementById('matchList');
+        data.events.forEach(event => {
+          const li = document.createElement('li');
+          li.innerText = `${event.strEvent} - ${event.dateEvent} at ${event.strTime}`;
+          matchList.appendChild(li);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  </script>
+</body>
+</html>
